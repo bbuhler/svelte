@@ -626,6 +626,17 @@ export default class Element extends Node {
 						message: `'contenteditable' attribute cannot be dynamic if element uses two-way binding`
 					});
 				}
+			} else if (name === 'validity') {
+				if (
+					this.name !== 'input' &&
+					this.name !== 'textarea' &&
+					this.name !== 'select'
+				) {
+					component.error(binding, {
+						code: `invalid-binding`,
+						message: `'validity' is not a valid binding on <${this.name}> elements`
+					});
+				}
 			} else if (name !== 'this') {
 				component.error(binding, {
 					code: `invalid-binding`,
